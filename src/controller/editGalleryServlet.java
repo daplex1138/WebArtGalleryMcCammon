@@ -40,19 +40,30 @@ public class editGalleryServlet extends HttpServlet {
 		ArtworkHelper dao = new ArtworkHelper();
 		
 		String act = request.getParameter("doThisToItem");
+		String radioSelection = request.getParameter("id");
 		if(act == null) {
 			//no button has been selected
 			getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
 		}else if(act.equals("Delete Selected Artwork")){
+			if(radioSelection == null) {
+				System.out.println("empty");
+				getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+			}else {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			Artwork itemToDelete = dao.searchForArtworkById(tempId);
 					dao.deleteItem(itemToDelete);
 			getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+			}
 		}else if(act.equals("Edit Selected Artwork")) {
+			if(radioSelection == null) {
+				System.out.println("empty");
+				getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+			}else {
 			Integer tempId = Integer.parseInt(request.getParameter("id"));
 			Artwork itemToEdit = dao.searchForArtworkById(tempId);
 			request.setAttribute("itemToEdit", itemToEdit);
 			getServletContext().getRequestDispatcher("/edit-artwork.jsp").forward(request, response);
+			}
 		}else if(act.equals("Add New Artwork")) {
 			getServletContext().getRequestDispatcher("/addItem.html").forward(request, response);
 		}

@@ -39,17 +39,32 @@ public class editArtworkServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ArtworkHelper dao = new ArtworkHelper();
+		String radioSelection = request.getParameter("id");
+		
+		if(radioSelection == null) {
+			System.out.println("empty");
+			getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+			
+		}else {
 		
 		String title = request.getParameter("title");
 		String artist = request.getParameter("artist_name");
+		String media = request.getParameter("media");
+		String year = request.getParameter("year");
+		Double value = Double.parseDouble(request.getParameter("value"));
 		Integer tempId = Integer.parseInt(request.getParameter("id"));
 		Artwork itemToUpdate = dao.searchForArtworkById(tempId);
 		itemToUpdate.setTitle(title);
 		itemToUpdate.setArtist_name(artist);
+		itemToUpdate.setMedia(media);
+		itemToUpdate.setYear(year);
+		itemToUpdate.setValue(value);
+		
 		
 		dao.updateArtwork(itemToUpdate);
 		
 		getServletContext().getRequestDispatcher("/viewAllItemsServlet").forward(request, response);
+		}
 	}
 
 }

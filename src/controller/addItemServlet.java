@@ -32,7 +32,10 @@ public class addItemServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String title = request.getParameter("title");
 		String artist	= request.getParameter("artist");
-		Artwork li = new Artwork(title, artist);
+		String media = request.getParameter("media");
+		String year = request.getParameter("year");
+		double value = Double.parseDouble(request.getParameter("value"));
+		Artwork li = new Artwork(title, artist, media, year, value);
 		ArtworkHelper dao = new ArtworkHelper();
 		dao.insertItem(li);
 		

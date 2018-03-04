@@ -11,6 +11,9 @@
 <form action ="editArtworkServlet" method ="post">
 Artwork: <input type="text" name="title" value="${itemToEdit.title}">
 Artist: <input type="text" name="artist_name" value="${itemToEdit.artist_name}">
+Media: <input type="text" name="media" value="${itemToEdit.media}">
+Year: <input type="text" name="year" value="${itemToEdit.year}">
+Value: <input type="text" name="value" value="${itemToEdit.value}">
 <input type="hidden" name="id" value="${itemToEdit.id}">
 <input type="submit" value="Save Edited Item">
 </form>
